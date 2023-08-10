@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Restaurant</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+  }
+  header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+  .menu-item {
+    display: inline-block;
+    margin: 1rem;
+    text-align: center;
+  }
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  #order {
+    text-align: center;
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Lucky Restaurant</h1>
+  </header>
+  <div class="menu-item">
+    <img src="noodle.jpg" alt="Noodles">
+    <h3>Noodles - Rs. 100</h3>
+    <button onclick="addToOrder('Noodles', 100)">Add to Order</button>
+  </div>
+  <div class="menu-item">
+    <img src="manchurian.jpg" alt="Manchurian">
+    <h3>Manchurian - Rs. 120</h3>
+    <button onclick="addToOrder('Manchurian', 120)">Add to Order</button>
+  </div>
+  <div class="menu-item">
+    <img src="burger.jpg" alt="Burger">
+    <h3>Burger - Rs. 40</h3>
+    <button onclick="addToOrder('Burger', 40)">Add to Order</button>
+  </div>
+  <div class="menu-item">
+    <img src="fanta.jpg" alt="Fanta">
+    <h3>Fanta - Rs. 30</h3>
+    <button onclick="addToOrder('Fanta', 30)">Add to Order</button>
+  </div>
+  <div class="menu-item">
+    <img src="coke.jpg" alt="Coke">
+    <h3>Coke - Rs. 30</h3>
+    <button onclick="addToOrder('Coke', 30)">Add to Order</button>
+  </div>
+  <div id="order">
+    <h2>Your Order</h2>
+    <ul id="order-list"></ul>
+    <h3>Total: Rs. <span id="total">0</span></h3>
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+
+  <script>
+    let orderItems = [];
+    let totalCost = 0;
+
+    function addToOrder(itemName, price) {
+      orderItems.push({ name: itemName, cost: price });
+      totalCost += price;
+      updateOrderDisplay();
+    }
+
+    function updateOrderDisplay() {
+      const orderList = document.getElementById('order-list');
+      const totalDisplay = document.getElementById('total');
+
+      orderList.innerHTML = '';
+      orderItems.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.innerText = `${item.name} - Rs. ${item.cost}`;
+        orderList.appendChild(listItem);
+      });
+
+      totalDisplay.innerText = totalCost;
+    }
+
+    function placeOrder() {
+      // Here you can implement the logic to finalize the order, maybe send it to a server, etc.
+      alert(`Order placed! Total: Rs. ${totalCost}`);
+      orderItems = [];
+      totalCost = 0;
+      updateOrderDisplay();
+    }
+  </script>
+</body>
+</html>
